@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Benvinguda from './components/Benvinguda';
 import Escena from './components/escena/Escena';
 
 const getData = async (setSentences, signal) => {
@@ -18,6 +19,7 @@ const getData = async (setSentences, signal) => {
 
 function App() {
   const [sentences, setSentences] = useState();
+  const [view, setView] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +31,8 @@ function App() {
 
   return (
     <>
-      <Escena sentences={sentences} />
+      <Benvinguda view={view} setView={setView} />
+      <Escena view={view} sentences={sentences} />
     </>
   );
 }

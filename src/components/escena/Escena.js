@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { VIEWS } from '../../constants/views';
 import { Button, Paragraph } from '../../styled';
 
-const Escena = ({ sentences }) => {
+const Escena = ({ sentences, view }) => {
   const [currentActive, setCurrentActive] = useState(0);
 
   if (!sentences) return null;
+  if (view !== VIEWS.ESCENA) return null;
 
   return (
     <>
