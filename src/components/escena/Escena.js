@@ -1,32 +1,37 @@
 import { useState } from 'react';
 import { VIEWS } from '../../constants/views';
-import { Button, Paragraph } from '../../styled';
+import { Button, ContainerScene, Paragraph } from '../../styled';
 
-const Escena = ({ sentences, view }) => {
+const Escena = ({ data, view }) => {
   const [currentActive, setCurrentActive] = useState(0);
 
-  if (!sentences) return null;
+  const handleNextCurrentActive = (next) => {
+    let newCurrent;
+    if (next < 0) newCurrent = data.length - 1;
+    if (next > data.length - 1) newCurrent = 0;
+    else newCurrent = next;
+
+    setCurrentActive(newCurrent);
+  };
+
+  if (!data) return null;
   if (view !== VIEWS.ESCENA) return null;
 
   return (
     <>
-      <Button
-        disabled={currentActive === 0}
-        onClick={() => setCurrentActive((prev) => prev - 1)}
-      >
-        Anterior
-      </Button>
-      <Button
-        disabled={currentActive === sentences.length - 1}
-        onClick={() => setCurrentActive((prev) => prev + 1)}
-      >
-        Següent
-      </Button>
-      {sentences.map((sentence, index) => (
-        <Paragraph bg={index === currentActive} key={index}>
-          {sentence}
-        </Paragraph>
-      ))}
+      <ContainerScene bgImage={data[currentActive].image}>
+        <Button onClick={() => handleNextCurrentActive(currentActive - 1)}>
+          Anterior
+        </Button>
+        <Button onClick={() => handleNextCurrentActive(currentActive + 1)}>
+          Següent
+        </Button>
+        {data.map((el, index) => (
+          <Paragraph bgUrl={el.image} bg={index === currentActive} key={index}>
+            {el.text}
+          </Paragraph>
+        ))}
+      </ContainerScene>
     </>
   );
 };

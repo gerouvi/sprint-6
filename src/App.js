@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import Benvinguda from './components/Benvinguda';
 import Escena from './components/escena/Escena';
+import { GlobalStyles } from './styled';
 
-const getData = async (setSentences, signal) => {
+const getData = async (setData, signal) => {
   try {
     const res = await fetch('../data.json', { signal });
 
     if (res.ok) {
       const data = await res.json();
 
-      setSentences(data);
+      setData(data);
     }
   } catch (error) {
     if (error.name === 'AbortError') return;
@@ -18,22 +19,23 @@ const getData = async (setSentences, signal) => {
 };
 
 function App() {
-  const [sentences, setSentences] = useState();
+  const [data, setData] = useState();
   const [view, setView] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    getData(setSentences, controller.signal);
+    getData(setData, controller.signal);
 
     return () => controller.abort();
   }, []);
 
   return (
-    <>
+    <div>
+      <GlobalStyles />
       <Benvinguda view={view} setView={setView} />
-      <Escena view={view} sentences={sentences} />
-    </>
+      <Escena view={view} data={data} />
+    </div>
   );
 }
 
