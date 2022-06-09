@@ -1,5 +1,5 @@
-import { VIEWS } from '../constants/views';
-import { Button, ContainerWelcome } from '../styled';
+import { VIEWS } from '../../constants/views';
+import { Button, ContainerWelcome } from './Benvinguda.styles.js';
 
 const Benvinguda = ({ view, setView }) => {
   if (view !== VIEWS.BENVINGUDA) return;

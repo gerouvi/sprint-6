@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { VIEWS } from '../../constants/views';
-import { Button, ContainerScene, Paragraph } from '../../styled';
+import { Button, ContainerScene, Paragraph } from './Escena.styles.js';
 
 const Escena = ({ data, view }) => {
   const [currentActive, setCurrentActive] = useState(0);
@@ -8,7 +8,7 @@ const Escena = ({ data, view }) => {
   const handleNextCurrentActive = (next) => {
     let newCurrent;
     if (next < 0) newCurrent = data.length - 1;
-    if (next > data.length - 1) newCurrent = 0;
+    else if (next > data.length - 1) newCurrent = 0;
     else newCurrent = next;
 
     setCurrentActive(newCurrent);

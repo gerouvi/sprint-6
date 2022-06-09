@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Benvinguda from './components/Benvinguda';
+import Benvinguda from './components/benvinguda/Benvinguda';
 import Escena from './components/escena/Escena';
-import { GlobalStyles } from './styled';
+import { GlobalStyles } from './globalStyled';
 
 const getData = async (setData, signal) => {
   try {
